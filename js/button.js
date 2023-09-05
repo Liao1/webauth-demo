@@ -13,4 +13,13 @@ function shatterAnimation() {
             polygon.style.opacity = 1;
         });
     }, 2000);
+    showToast();
+}
+
+function showToast() {
+    const toast = document.getElementById('toastMessage');
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000); // 3秒后自动隐藏
 }
