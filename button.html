@@ -3,28 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metamask Button Animation</title>
-    <link rel="stylesheet" href="./css/button.css">
+    <title>Button Animation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #btn {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #btn i {
+            margin-right: 10px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="button-container" onclick="shatterAnimation()">
-        <svg id="metamaskButton" viewBox="0 0 200 60">
-            <defs>
-                <pattern id="metamaskPattern" patternUnits="userSpaceOnUse" width="200" height="60">
-                    <image href="./resources/metamask.png" x="10" y="10" width="40" height="40"></image>
-                    <text x="60" y="40" fill="#fff">Metamask</text>
-                </pattern>
-            </defs>
-            <!-- You can add more pieces to make it look more shattered -->
-            <polygon points="0,0 100,0 50,30" fill="url(#metamaskPattern)"></polygon>
-            <polygon points="100,0 200,0 150,30" fill="url(#metamaskPattern)"></polygon>
-            <polygon points="0,0 50,30 0,60" fill="url(#metamaskPattern)"></polygon>
-            <polygon points="200,0 150,30 200,60" fill="url(#metamaskPattern)"></polygon>
-            <polygon points="0,60 50,30 100,60" fill="url(#metamaskPattern)"></polygon>
-            <polygon points="200,60 150,30 100,60" fill="url(#metamaskPattern)"></polygon>
-        </svg>
-    </div>
-    <div class="toast" id="toastMessage">No need for this anymore.</div>
-    <script src="./js/button.js"></script>
+    <button id="btn">
+        <i class="fab fa-ethereum"></i>
+        Metamask
+    </button>
+    <div class="toast">No need for this anymore.</div>
+
+    <script>
+        const btn = document.getElementById('btn');
+        const toast = document.querySelector('.toast');
+
+        btn.addEventListener('click', () => {
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+
+            btn.style.transition = 'all 0.5s';
+            btn.style.opacity = '0';
+            setTimeout(() => {
+                btn.style.transition = 'none';
+                btn.style.clipPath = 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)';
+                setTimeout(() => {
+                    btn.style.transition = 'all 1s';
+                    btn.style.clipPath = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';
+                    btn.style.opacity = '1';
+                }, 100);
+            }, 500);
+        });
+    </script>
 </body>
 </html>
