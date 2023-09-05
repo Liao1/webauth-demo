@@ -1,17 +1,16 @@
-const burst = new mojs.Burst({
-    parent: '#metamaskButton',
-    radius: { 0: 100 },
-    count: 20,
-    children: {
-        shape: 'cross',
-        stroke: 'white',
-        strokeWidth: { 6: 0 },
-        angle: { 360: 0 },
-        radius: { 30: 5 },
-        duration: 3000
-    }
-});
+function shatterAnimation() {
+    const polygons = document.querySelectorAll('#metamaskButton polygon');
+    polygons.forEach((polygon, index) => {
+        setTimeout(() => {
+            polygon.style.transform = `translate(${Math.random() * 50 - 25}px, ${Math.random() * 50 - 25}px)`;
+            polygon.style.opacity = 0;
+        }, index * 100);
+    });
 
-function burstAnimation() {
-    burst.replay();
+    setTimeout(() => {
+        polygons.forEach(polygon => {
+            polygon.style.transform = 'none';
+            polygon.style.opacity = 1;
+        });
+    }, 2000);
 }

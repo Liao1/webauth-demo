@@ -7,13 +7,23 @@
     <link rel="stylesheet" href="./css/button.css">
 </head>
 <body>
-    <div class="button-container">
-        <button id="metamaskButton" onclick="burstAnimation()">
-            <img src="./resources/metamask.png" alt="Metamask Icon">
-            Metamask
-        </button>
+    <div class="button-container" onclick="shatterAnimation()">
+        <svg id="metamaskButton" viewBox="0 0 200 60">
+            <defs>
+                <pattern id="metamaskPattern" patternUnits="userSpaceOnUse" width="200" height="60">
+                    <image href="./resources/metamask.png" x="10" y="10" width="40" height="40"></image>
+                    <text x="60" y="40" fill="#fff">Metamask</text>
+                </pattern>
+            </defs>
+            <!-- You can add more pieces to make it look more shattered -->
+            <polygon points="0,0 100,0 50,30" fill="url(#metamaskPattern)"></polygon>
+            <polygon points="100,0 200,0 150,30" fill="url(#metamaskPattern)"></polygon>
+            <polygon points="0,0 50,30 0,60" fill="url(#metamaskPattern)"></polygon>
+            <polygon points="200,0 150,30 200,60" fill="url(#metamaskPattern)"></polygon>
+            <polygon points="0,60 50,30 100,60" fill="url(#metamaskPattern)"></polygon>
+            <polygon points="200,60 150,30 100,60" fill="url(#metamaskPattern)"></polygon>
+        </svg>
     </div>
-    <script src="https://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
     <script src="./js/button.js"></script>
 </body>
 </html>
