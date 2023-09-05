@@ -27,6 +27,7 @@
             outline: none;
             position: relative;
             overflow: hidden;
+            animation: reassemble 1s forwards;
         }
 
         #btn i {
@@ -43,6 +44,27 @@
             padding: 10px 20px;
             border-radius: 5px;
             display: none;
+        }
+
+        @keyframes shatter {
+            0% {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            }
+            50% {
+                clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+            }
+            100% {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            }
+        }
+
+        @keyframes reassemble {
+            0%, 100% {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            }
+            50% {
+                clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+            }
         }
     </style>
 </head>
@@ -63,17 +85,10 @@
                 toast.style.display = 'none';
             }, 3000);
 
-            btn.style.transition = 'all 0.5s';
-            btn.style.opacity = '0';
+            btn.style.animation = 'shatter 2s forwards';
             setTimeout(() => {
-                btn.style.transition = 'none';
-                btn.style.clipPath = 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)';
-                setTimeout(() => {
-                    btn.style.transition = 'all 1s';
-                    btn.style.clipPath = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';
-                    btn.style.opacity = '1';
-                }, 100);
-            }, 500);
+                btn.style.animation = 'reassemble 2s forwards';
+            }, 2000);
         });
     </script>
 </body>
