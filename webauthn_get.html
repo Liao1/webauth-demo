@@ -25,6 +25,12 @@
             return result;
         }
 
+        function arrayBufferToHex(a) {
+            let s = "0x"
+            for (const b of new Uint8Array(a)) s += b.toString(16).padStart(2, "0")
+            return s
+        }
+
         async function createCredential() {
             try {
                 const publicKey = {
@@ -48,6 +54,7 @@
 
                 const credential = await navigator.credentials.create({ publicKey });
                 console.log('Credential Created:', credential);
+                console.log('attestationObject: ', arrayBufferToHex(credential.response.attestationObject));
             } catch (error) {
                 console.error('Error creating credential:', error);
             }
